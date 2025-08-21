@@ -1,3 +1,7 @@
+# TMUX Plugin: tmux-harpoon
+# Author: mxm-ssdia
+# Description: Minimal harpoon-style navigation popup for tmux
+
 #!/usr/bin/env bash
 
 CURRENT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
