@@ -13,7 +13,8 @@ bind-key b set-option -g status
 set -g status 2
 
 # --- Harpoon Popup Binding ---
-bind-key h display-popup -E "$TMUX_PLUGIN_MANAGER_PATH/tmux-harpoon/scripts/main.sh"
+# Use TPM variable expansion for plugin path
+bind-key h display-popup -E "#{plugin_path}/scripts/main.sh"
 
 # --- Plugin Loaded Message ---
 display-message "✅ tmux-harpoon loaded! (prefix+h to trigger)"
