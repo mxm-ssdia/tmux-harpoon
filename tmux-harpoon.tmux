@@ -5,9 +5,10 @@
 # Show session:window in status-right
 set -g status-right '#S:#I'
 
-# Bind prefix+h to run our script
-# bind-key h display-popup -E "$HOME/projects/tmux-harpoon/scripts/main.sh"
-bind-key h display-popup -E "#{plugin_path}/scripts/main.sh"
+set -g @tmux-harpoon-dir "$TMUX_PLUGIN_MANAGER_PATH/tmux-harpoon"
+
+bind-key h display-popup -E "#(@tmux-harpoon-dir)/scripts/main.sh"
+
 
 
 # Show a message when the plugin is loaded
