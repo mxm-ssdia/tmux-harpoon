@@ -8,9 +8,7 @@ window_index=0
 
 while true; do
     clear
-    echo "Tmux Harpoon Navigator"
-    echo "======================"
-    echo "[h/l] move tab  [Ctrl-p/Ctrl-n] move session  [Enter] switch  [q] quit"
+    echo "[h/l] move tab  [Ctrl-p/Ctrl-n] move session  "
     echo
 
     for i in "${!sessions[@]}"; do
@@ -51,5 +49,22 @@ while true; do
         exit 0
         ;;
     q) exit 0 ;;
+    r) # rename session
+        echo -n "New session name: "
+        read -r newname
+        [[ -n "$newname" ]] && tmux rename-session -t "${sessions[$session_index]}" "$newname"
+        # refresh sessions
+        mapfile -t sessions < <(tmux list-sessions -F '#S')
+        ;;
+
+    R) # rename window
+        echo -n "New window name: "
+        read -r newname
+        if [[ -n "$newname" ]]; then
+            sel_session="${sessions[$session_index]}"
+            sel_window=$(tmux list-windows -t "$sel_session" -F '#I' | sed -n "$((window_index + 1))p")
+            tmux rename-window -t "$sel_session:$sel_window" "$newname"
+        fi
+        ;;
     esac
 done
